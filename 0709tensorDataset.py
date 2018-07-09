@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def gen():
-    for i, j in zip(range(10, 20), range(10)):
+    for i, j in zip(range(10, 1010), range(1000)):
         yield (i, j)
 
 
