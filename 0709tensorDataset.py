@@ -1,6 +1,9 @@
 import tensorflow as tf
 
 
+# Generator for get a data
+# => Take too many time
+# => Solution TextlineDataset("Path") / Dataset("Path")
 def gen():
     for i, j in zip(range(10, 1010), range(1000)):
         yield (i, j)
