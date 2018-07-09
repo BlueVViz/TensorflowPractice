@@ -7,6 +7,7 @@ def gen():
 
 
 dataset = tf.data.Dataset.from_generator(gen, (tf.float32, tf.float32))\
+    .batch(10)\
     .make_one_shot_iterator()\
     .get_next()
 
