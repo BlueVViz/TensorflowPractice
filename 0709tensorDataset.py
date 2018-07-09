@@ -13,6 +13,6 @@ dataset = tf.data.Dataset.from_generator(gen, (tf.float32, tf.float32))\
 
 with tf.Session() as sess:
     for _ in range(10):
-        _data = sess.run(dataset)
-        print(_data)
+        _label, _data = sess.run(dataset)
+        print(_label, _data)
 
