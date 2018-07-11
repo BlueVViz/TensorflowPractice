@@ -16,3 +16,9 @@ cost = -tf.reduce_mean(y * tf.log(hypothesis)) + (1 - y) * tf.log(1 - hypothesis
 
 # Train line
 train = tf.GradientDescentOptimizer(alpha).minimize(cost)
+
+
+# Launch the graph
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+
