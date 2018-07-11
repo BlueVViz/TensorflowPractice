@@ -14,3 +14,4 @@ bias = tf.Variable(tf.random_normal([1]), name='bias')
 hypothesis = tf.sigmoid(tf.matmul(x, weight) + bias)
 cost = -tf.reduce_mean(y * tf.log(hypothesis)) + (1 - y) * tf.log(1 - hypothesis)
 
+train = tf.GradientDescentOptimizer(alpha).minimize(cost)
