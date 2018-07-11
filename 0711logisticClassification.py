@@ -22,3 +22,9 @@ train = tf.GradientDescentOptimizer(alpha).minimize(cost)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
+    for step in range(10001):
+        cost_val, _ = sess.run([cost, train], feed_dict={x: x_data, y: y_data})
+        if step % 200 == 0:
+            print(step, cost_val)
+
+
