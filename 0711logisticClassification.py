@@ -10,3 +10,5 @@ y = tf.placeholder(tf.float32, shape=[None, 1])
 
 weight = tf.Variables(tf.random_normal([2, 1]), name='weight')
 bias = tf.Variables(tf.random_normal([1]), name='bias')
+
+hypothesis = tf.sigmoid(tf.matmul(x, weight) + bias)
