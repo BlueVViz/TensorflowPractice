@@ -27,4 +27,8 @@ with tf.Session() as sess:
         if step % 200 == 0:
             print(step, cost_val)
 
+    h, c, a = sess.run([hypothesis, predicted, accuracy], feed_dict={x: x_data, y: y_data})
+    print("\nHypothesis: ", h, "\nCorrect(Y: ", c, "\nAccuracy: ", a)
+
+
 
