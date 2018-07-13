@@ -15,20 +15,20 @@ def input_fn():
     x = tf.placeholder(tf.float32, [None, feature])
     y = tf.placeholder(tf.float32, [None, classes])
 
-weight1 = tf.Variable(tf.zeros(shape=[feature, layer1]), dtype=tf.float32, name='weight1')
-bais1 = tf.Variable(tf.zeros(shape=[layer1]), dtype=tf.float32, name='bais1')
+    weight1 = tf.Variable(tf.zeros(shape=[feature, layer1]), dtype=tf.float32, name='weight1')
+    bais1 = tf.Variable(tf.zeros(shape=[layer1]), dtype=tf.float32, name='bais1')
 
-weight2 = tf.Variable(tf.zeros(shape=[layer1, layer2]), dtype=tf.float32, name='weight2')
-bais2 = tf.Variable(tf.zeros(shape=[layer2]), dtype=tf.float32, name='bais2')
+    weight2 = tf.Variable(tf.zeros(shape=[layer1, layer2]), dtype=tf.float32, name='weight2')
+    bais2 = tf.Variable(tf.zeros(shape=[layer2]), dtype=tf.float32, name='bais2')
 
-weight3 = tf.Variable(tf.zeros(shape=[layer2, layer3]), dtype=tf.float32, name='weight3')
-bais3 = tf.Variable(tf.zeros(shape=[layer3]), dtype=tf.float32, name='bais3')
+    weight3 = tf.Variable(tf.zeros(shape=[layer2, layer3]), dtype=tf.float32, name='weight3')
+    bais3 = tf.Variable(tf.zeros(shape=[layer3]), dtype=tf.float32, name='bais3')
 
-weightOut = tf.Variable(tf.zeros(shape=[layer3, classes]), dtype=tf.float32, name='weightOut')
-baisOut = tf.Variable(tf.zeros(shape=[classes]), dtype=tf.float32, name='baisOut')
+    weightOut = tf.Variable(tf.zeros(shape=[layer3, classes]), dtype=tf.float32, name='weightOut')
+    baisOut = tf.Variable(tf.zeros(shape=[classes]), dtype=tf.float32, name='baisOut')
 
-para_list = [weight1, weight2, weight3, weightOut, bais1, bais2, bais3, baisOut]
-saver = tf.train.Saver(para_list)
+    para_list = [weight1, weight2, weight3, weightOut, bais1, bais2, bais3, baisOut]
+    saver = tf.train.Saver(para_list)
 
 _layer1 = tf.sigmoid(tf.matmul(x, weight1) + bais1)
 _layer2 = tf.sigmoid(tf.matmul(_layer1, weight2) + bais2)
