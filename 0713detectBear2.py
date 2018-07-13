@@ -1,19 +1,19 @@
 import tensorflow as tf
 import pandas as pd
 
+def input_fn():
+    inputData = pd.read_csv("./data/bear_data.csv", usecols=[0, 1])
+    outputData = pd.read_csv("./data/bear_data.csv", usecols=[2, 3])
 
-inputData = pd.read_csv("./data/bear_data.csv", usecols=[0, 1])
-outputData = pd.read_csv("./data/bear_data.csv", usecols=[2, 3])
+    feature = 2
+    layer1 = 4
+    layer2 = 5
+    layer3 = 4
+    classes = 2
+    rate = 1.2
 
-feature = 2
-layer1 = 4
-layer2 = 5
-layer3 = 4
-classes = 2
-rate = 1.2
-
-x = tf.placeholder(tf.float32, [None, feature])
-y = tf.placeholder(tf.float32, [None, classes])
+    x = tf.placeholder(tf.float32, [None, feature])
+    y = tf.placeholder(tf.float32, [None, classes])
 
 weight1 = tf.Variable(tf.zeros(shape=[feature, layer1]), dtype=tf.float32, name='weight1')
 bais1 = tf.Variable(tf.zeros(shape=[layer1]), dtype=tf.float32, name='bais1')
