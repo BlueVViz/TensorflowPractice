@@ -30,16 +30,27 @@ def input_fn():
     para_list = [weight1, weight2, weight3, weightOut, bais1, bais2, bais3, baisOut]
     saver = tf.train.Saver(para_list)
 
-_layer1 = tf.sigmoid(tf.matmul(x, weight1) + bais1)
-_layer2 = tf.sigmoid(tf.matmul(_layer1, weight2) + bais2)
-_layer3 = tf.sigmoid(tf.matmul(_layer2, weight3) + bais3)
-_classes = tf.sigmoid(tf.matmul(_layer3, weightOut) + baisOut)
+def model_fn(features, labels, mode):
+    TRAIN = mode == tf.estimator.ModeKeys.TRAIN
+    EVAL = mode == tf.estimator.ModeKeys.EVAL
 
-y_ = tf.nn.softmax(_classes)
+    _layer1 = tf.sigmoid(tf.matmul(x, weight1) + bais1)
+    _layer2 = tf.sigmoid(tf.matmul(_layer1, weight2) + bais2)
+    _layer3 = tf.sigmoid(tf.matmul(_layer2, weight3) + bais3)
+    _classes = tf.sigmoid(tf.matmul(_layer3, weightOut) + baisOut)
 
-#---------------
-cross_entropy= tf.reduce_mean(-tf.reduce_sum(y * tf.log(y_), reduction_indices=[1]))
-train_step = tf.train.GradientDescentOptimizer(rate).minimize(cross_entropy)
+    y_ = tf.nn.softmax(_classes)
+
+    if TRAIN:
+        gs = tf.train.get)global_step()
+        cross_entropy= tf.reduce_mean(-tf.reduce_sum(y * tf.log(y_), reduction_indices=[1]))
+        train_step = tf.train.GradientDescentOptimizer(rate).minimize(cross_entropy)
+        return tf.estimator.EstimatorSpec(mode, cross_entropy, train_step)
+
+    elif EVAL:
+        correct_prediction = tf.cast(tf.equal(tf.argmax(y_, 1), tf.argmax(y, 1)), tf.float32)
+        accuracy = tf.reduce_mean(correct_prediction)
+
 
 init = tf.global_variables_initializer()
 sess = tf.Session()
@@ -54,8 +65,7 @@ for i in range(20000):
         print("-----------------")
 saver.save(sess, './data/trained_weight.ckpt')
 
-correct_prediction = tf.cast(tf.equal(tf.argmax(y_,1), tf.argmax(y,1)), tf.float32)
-accuracy = tf.reduce_mean(correct_prediction)
+
 acc = sess.run(accuracy, feed_dict={x:inputData, y:outputData})
 
 print("Accuracy: ", acc)
