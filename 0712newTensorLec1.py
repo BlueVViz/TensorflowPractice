@@ -53,7 +53,6 @@ def model_fn(features, labels, mode):
     elif PRED:
         prob = tf.nn.sigmoid(out)
         _class = tf.round(prob)
-
         return tf.estimator.EstimatorSpec(mode, prediction={"prob": prob, "class": _class})
 
 if __name__== "__main__":
