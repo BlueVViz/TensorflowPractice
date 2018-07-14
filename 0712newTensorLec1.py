@@ -21,7 +21,7 @@ def input_fn():
 
     feature = tf.cast(feature, tf.float32)
     label = tf.cast(label, tf.float32)
-    return {"feature": features}, label
+    return {"feature": feature}, label
 
 
 def model_fn(features, labels, mode):
@@ -53,6 +53,7 @@ def model_fn(features, labels, mode):
     elif PRED:
         prob = tf.nn.sigmoid(out)
         _class = tf.round(prob)
+
         return tf.estimator.EstimatorSpec(mode, prediction={"prob": prob, "class": _class})
 
 if __name__== "__main__":
